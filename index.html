@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Online Book Store</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="CSS/responsive-nav.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="CSS/menustyles.css">
+    <link rel="stylesheet" href="CSS/tablestyle.css">
+    <script src="CSS/responsive-nav.js"></script>
+ 
+
+	<link rel="stylesheet" type="text/css" href="engine1/style.css" />
+	<script type="text/javascript" src="engine1/jquery.js"></script>
+
+  <style>
+	
+	/* 
+	Max width before this PARTICULAR table gets nasty
+	This query will take effect for any screen smaller than 760px
+	and also iPads specifically.
+	*/
+	@media 
+	only screen and (max-width: 760px),
+	(min-device-width: 768px) and (max-device-width: 1024px)  {
+	
+		/* Force table to not be like tables anymore */
+		table, thead, tbody, th, td, tr { 
+			display: block; 
+		}
+		
+		/* Hide table headers (but not display: none;, for accessibility) */
+		thead tr { 
+			position: absolute;
+			top: -9999px;
+			left: -9999px;
+		}
+		
+		tr { border: 0px solid #ccc; }
+		
+		td { 
+			/* Behave  like a "row" */
+			border: none;
+			border-bottom: 0px solid #eee; 
+			position: relative;
+			padding-left: 0%; 
+		}
+		
+		td:before { 
+			/* Now like a table header */
+			position: absolute;
+			/* Top/left values mimic padding */
+			top: 6px;
+			left: 6px;
+			width: 45%; 
+			padding-right: 10px; 
+			white-space: nowrap;
+		}
+		
+		/*
+		Label the data
+		*/
+		/*td:nth-of-type(1):before { content: "First Name"; }
+		td:nth-of-type(2):before { content: "Last Name"; }
+		td:nth-of-type(3):before { content: "Job Title"; }
+		td:nth-of-type(4):before { content: "Favorite Color"; }
+		td:nth-of-type(5):before { content: "Wars of Trek?"; }
+		td:nth-of-type(6):before { content: "Test Name"; }
+		td:nth-of-type(7):before { content: "Date of Birth"; }
+		td:nth-of-type(8):before { content: "Dream Vacation City"; }
+		td:nth-of-type(9):before { content: "GPA"; }
+		td:nth-of-type(10):before { content: "Arbitrary Data"; }*/
+	}
+	
+	/* Smartphones (portrait and landscape) ----------- */
+	@media only screen
+	and (min-device-width : 320px)
+	and (max-device-width : 480px) {
+		body { 
+			padding: 0; 
+			margin: 0; 
+			width: 375px; }
+		}
+	
+	/* iPads (portrait and landscape) ----------- */
+	@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+		body { 
+			width: 495px; 
+		}
+	}
+	
+	</style>
+
+<body>
+<p align="center">BOOK STORE</p>
+ 	<hr align="center" width="100%" size="5" color="#D6D6D6"   />
+<nav class="nav-collapse">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Categories</a></li>
+        <li><a href="#">Account</a></li>
+        <li><a href="#">Basket</a></li>
+         <li><a href="#">Logout</a></li>
+  </ul>
+  </nav>
+  	<hr align="center" width="100%" size="5" color="#D6D6D6"   />
+
+<table>
+		<p>&nbsp;</p>
+        <tbody>
+		<tr>
+			<table width="100%" border="0">
+  <tr>
+    <td>
+	<div id="wowslider-container1">
+	<div class="ws_images"><ul>
+		<li><img src="data1/images/1.jpg" alt="" title="" id="wows1_0"/></li>
+		<li><img src="data1/images/2.jpg" alt="" title="" id="wows1_1"/></a></li>
+		<li><img src="data1/images/3.jpg" alt="" title="" id="wows1_2"/></li>
+	</ul></div>
+	<div class="ws_bullets"><div>
+		<a href="#" title=""><span><img src="data1/tooltips/1.jpg" alt=""/>1</span></a>
+		<a href="#" title=""><span><img src="data1/tooltips/2.jpg" alt=""/>2</span></a>
+		<a href="#" title=""><span><img src="data1/tooltips/3.jpg" alt=""/>3</span></a>
+	</div></div>
+	<div class="ws_shadow"></div>
+	</div>	
+	<script type="text/javascript" src="engine1/sliderjs.js"></script>
+	<script type="text/javascript" src="engine1/script.js"></script>
+
+</td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0">
+  <tr>
+    <td width="40%">Filter</td>
+    <td width="60%">Content</td>
+  </tr>
+</table>
+</td>
+  </tr>
+</table>
+
+		</tr></tbody>
+        </table>
+
+</body>
+ 
+<script>
+      var navigation = responsiveNav(".nav-collapse", {
+        animate: true,                    // Boolean: Use CSS3 transitions, true or false
+        transition: 284,                  // Integer: Speed of the transition, in milliseconds
+        label: "Menu",                    // String: Label for the navigation toggle
+        insert: "after",                  // String: Insert the toggle before or after the navigation
+        customToggle: "",                 // Selector: Specify the ID of a custom toggle
+        closeOnNavClick: false,           // Boolean: Close the navigation when one of the links are clicked
+        openPos: "relative",              // String: Position of the opened nav, relative or static
+        navClass: "nav-collapse",         // String: Default CSS class. If changed, you need to edit the CSS too!
+        navActiveClass: "js-nav-active",  // String: Class that is added to <html> element when nav is active
+        jsClass: "js",                    // String: 'JS enabled' class which is added to <html> element
+        init: function(){},               // Function: Init callback
+        open: function(){},               // Function: Open callback
+        close: function(){}               // Function: Close callback
+      });
+      </script>
+</html>
