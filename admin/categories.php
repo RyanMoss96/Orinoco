@@ -59,7 +59,7 @@
                         echo "<td>" . $book->name . "</td>";
                         echo "<td>" . $book->description . "</td>";
                         echo "<td><a href='./index.php?action=viewCategory&id=". $book->category_id ."' class='btn btn-success'>Open</a>"
-                        ."<a href='./index.php?action=edit&id=". $book->category_id ."' class='btn btn-info'>Edit</a> "
+                        ."<a href='./index.php?action=edit&id=". $book->category_id ."' class='btn btn-info '>Edit</a> "
                         ."<a href='./index.php?action=delete&id=". $book->category_id ."' class='btn btn-danger'>X</a></td>";
                         echo "</tr>";
                       }

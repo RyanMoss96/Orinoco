@@ -36,8 +36,7 @@
   </head>
 
   <body>
-
-    <?php include('topnavbar.php'); ?>
+      <?php include('topnavbar.php'); ?>
 
     <div class="container-fluid">
       <div class="row">
@@ -101,8 +100,15 @@
                         echo "<td>" . $book->price . "</td>";
                         echo "<td>" . $book->discount_price . "</td>";
                         echo "<td>" . $book->quantity . "</td>";
-                        echo "<td><a href='./index.php?action=edit&id=". $book->product_id ."' class='btn btn-success'>Edit</a> "
-                        ."<a href='./index.php?action=delete&id=". $book->product_id ."' class='btn btn-danger'>X</a></td>";
+                        // echo "<td> "
+                        // ."<a href='./index.php?action=delete&id=". $book->product_id ."' class='btn btn-danger'>X</a>";
+                          echo "<td>"
+                          ."<form action =\"#\" method=\"POST\">
+                          <a href='./index.php?action=edit&id=". $book->product_id ."' class='btn btn-success'>Edit</a>
+                          <a href='./index.php?action=delete&id=" . $book->product_id . "' class='btn btn-danger' >X</button>
+                          </form>"
+                          ."</td>";
+
                         echo "</tr>";
                       }
                   }
@@ -127,5 +133,7 @@
 
     <!-- Lightbox -->
     <script src="./js/lightbox.js"></script>
+
+    <?php include("./popupButtons.php"); ?>
   </body>
 </html>
