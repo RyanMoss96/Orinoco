@@ -134,6 +134,40 @@
     <!-- Lightbox -->
     <script src="./js/lightbox.js"></script>
 
-    <?php include("./popupButtons.php"); ?>
+    <?php
+    if(isset($_GET['message'])){
+      ?>
+      <script src="./js/sweetalert.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="./css/sweetalert.css">
+
+      <script type="text/javascript">
+        document.querySelector('body').onload = function(){
+          swal("Good job!", "You clicked the button!", "success");
+
+          <?php 
+              switch ($_GET['message']) {
+                  case "productDeleted":
+                      echo "swal(\"Good job!\", \"The product has been deleted!\", \"success\")";
+                      break;
+                  case "productEdited":
+                      echo "swal(\"Good job!\", \"The product has been edited successfully!\", \"success\")";
+                      break;
+                  case "productCreated":
+                      echo "swal(\"Good job!\", \"The product has been created successfully!\", \"success\")";
+                      break;
+                  default:
+                      echo "Your favorite color is neither red, blue, nor green!";
+              }
+              
+
+          ?>
+        };
+
+      </script>
+
+      <?php
+      }
+  
+    include_once("./popupButtons.php"); ?>
   </body>
 </html>
