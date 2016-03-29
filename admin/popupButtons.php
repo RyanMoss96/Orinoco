@@ -57,13 +57,19 @@
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <h4 class="modal-title" id="myModalLabel">Edit product</h4>
               <div class="modal-body">
-              <form method="post" action="postProduct.php" id="postProduct">
+              <form method="POST" action="postProduct.php?action=update" id="postProduct">
+               <div class="form-group">
+                <label class="control-label" for="id">
+                  ID
+                </label>
+                <input class="form-control" id="id" name="id" type="text" readonly
+                <?php if(isset($book->product_id) && $book->product_id!= NULL){
+                  echo "value=\"". $book->product_id. "\"";
+                  }?> />
+               </div>
                <div class="form-group ">
                 <label class="control-label requiredField" for="title">
-                 Title
-                 <span class="asteriskField">
-                  *
-                 </span>
+                  Title<span class="asteriskField">*</span>
                 </label>
                 <input class="form-control" id="title" name="title" type="text" required 
                 <?php if(isset($book->title) && $book->title!= NULL){
@@ -80,10 +86,10 @@
                   }?> />
                </div>
                <div class="form-group ">
-                <label class="control-label " for="subject">
+                <label class="control-label " for="description">
                  Description
                 </label>
-                <input class="form-control" id="subject" name="subject" type="text"
+                <input class="form-control" id="description" name="description" type="text"
                  <?php if(isset($book->description) && $book->description!= NULL){
                   echo "value=\"". $book->description. "\"";
                   }?> />
@@ -127,7 +133,7 @@
             </div>
             <div class="modal-footer">
               <button type="button"class="btn btn-default" data-dismiss="modal">Cancel</button>
-              <button type="submit" form="postProduct"  class="btn btn-primary">Save changes</button>
+              <button type="submit" form="postProduct" class="btn btn-primary">Save changes</button>
             </div>
           </div>
         </div>
