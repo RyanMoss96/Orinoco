@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="Orinoco">
+	<products>
+		<product product_id="1" category_id="2" title="Edited Book" photo_url="images/books/generic-book-cover.jpg" description="editeee" price="12.99" discount_price="11.00" status="0" quantity="7" created_at="2016-03-29 15:26:52" updated_at="0000-00-00 00:00:00" />
+		<product product_id="2" category_id="2" title="Book 2" photo_url="images/books/generic-book-cover-2.jpg" description="Description of book 2" price="160.00" discount_price="111.99" status="0" quantity="5" created_at="2016-03-29 10:51:03" updated_at="0000-00-00 00:00:00" />
+		<product product_id="3" category_id="2" title="Book 3" photo_url="images/books/generic-book-cover.jpg" description="Description of book 3" price="60.00" discount_price="51.99" status="0" quantity="5" created_at="2016-03-29 10:50:31" updated_at="0000-00-00 00:00:00" />
+		<product product_id="5" category_id="2" title="Book 5" photo_url="images/books/generic-book-cover.jpg" description="Description of book 5" price="13.99" discount_price="12.00" status="0" quantity="5" created_at="2016-03-29 10:50:38" updated_at="0000-00-00 00:00:00" />
+		<product product_id="6" category_id="2" title="Book 6" photo_url="images/books/generic-book-cover-2.jpg" description="Description of book 6" price="56.00" discount_price="551.99" status="0" quantity="5" created_at="2016-03-29 10:51:13" updated_at="0000-00-00 00:00:00" />
+		<product product_id="7" category_id="2" title="Book 7" photo_url="images/books/generic-book-cover.jpg" description="Description of book 7" price="30.00" discount_price="21.94" status="0" quantity="5" created_at="2016-03-29 10:50:42" updated_at="0000-00-00 00:00:00" />
+		<product product_id="8" category_id="2" title="Book 8" photo_url="images/books/generic-book-cover-2.jpg" description="Description of book 8" price="7.00" discount_price="5.00" status="0" quantity="5" created_at="2016-03-29 10:51:18" updated_at="0000-00-00 00:00:00" />
+		<product product_id="10" category_id="1" title="Book Edited" photo_url="images/books/generic-book-cover-2.jpg" description="fsdfds" price="6.00" discount_price="5.00" status="1" quantity="5" created_at="2016-03-29 15:07:38" updated_at="0000-00-00 00:00:00" />
+		<product product_id="17" category_id="1" title="newTitle6998" photo_url="images/books/book-cover-not-available.gif" description="editeee" price="999.99" discount_price="99.99" status="1" quantity="65" created_at="2016-03-29 15:55:55" updated_at="0000-00-00 00:00:00" />
+	</products>
+</database>
