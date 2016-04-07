@@ -1,4 +1,4 @@
-<?php require('db.php'); ?>
+<?php require 'db.php';?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="images/favicon.ico">
-    
+
     <title>Orinoco Backend</title>
 
     <!-- Bootstrap core CSS -->
@@ -32,15 +32,15 @@
 
     <!-- Charts  -->
     <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.5.1.css">
-   
+
   </head>
 
   <body>
-      <?php include('topnavbar.php'); ?>
+      <?php include 'topnavbar.php';?>
 
     <div class="container-fluid">
       <div class="row">
-        <?php include('sidebar.php'); ?>
+        <?php include 'sidebar.php';?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <div class="visible-xs"><a href="javascript:alert('Still working on it');">Show sidebar</a></div>
           <h1 class="page-header">Dashboard</h1>
@@ -86,34 +86,37 @@
               <tbody>
                 <?php
 
-                  /* Select queries return a resultset */
-                  $sql="SELECT * FROM Products";
-                  if ($result = $conn->query($sql)) {
-                      while($book = $result->fetch_object()){
-                        echo "<tr>";
-                        echo "<td>" . $book->product_id . "</td>";
-                        echo "<td>" . $book->title . "</td>";
-                        echo "<td>"
-                        . "<a href='" . $book->photo_url . "' data-lightbox='image-1'>"
-                        . "<img height='50px' src='" . $book->photo_url . "' data-lightbox='image-1'/></a></td>";
-                        echo "<td>" . $book->description . "</td>";
-                        echo "<td>" . $book->price . "</td>";
-                        echo "<td>" . $book->discount_price . "</td>";
-                        echo "<td>" . $book->quantity . "</td>";
-                        // echo "<td> "
-                        // ."<a href='./index.php?action=delete&id=". $book->product_id ."' class='btn btn-danger'>X</a>";
-                          echo "<td>"
-                          ."<form action =\"#\" method=\"POST\">
-                          <a href='./index.php?action=edit&id=". $book->product_id ."' class='btn btn-success'>Edit</a>
+/* Select queries return a resultset */
+$sql = "SELECT * FROM products";
+$result = $conn->query($sql);
+// var_dump($result);
+// trigger_error($conn->error . " " . $sql);
+if ($result !== false) {
+    while ($book = $result->fetch_object()) {
+        echo "<tr>";
+        echo "<td>" . $book->product_id . "</td>";
+        echo "<td>" . $book->title . "</td>";
+        echo "<td>"
+        . "<a href='" . $book->photo_url . "' data-lightbox='image-1'>"
+        . "<img height='50px' src='" . $book->photo_url . "' data-lightbox='image-1'/></a></td>";
+        echo "<td>" . $book->description . "</td>";
+        echo "<td>" . $book->price . "</td>";
+        echo "<td>" . $book->discount_price . "</td>";
+        echo "<td>" . $book->quantity . "</td>";
+        // echo "<td> "
+        // ."<a href='./index.php?action=delete&id=". $book->product_id ."' class='btn btn-danger'>X</a>";
+        echo "<td>"
+        . "<form action =\"#\" method=\"POST\">
+                          <a href='./index.php?action=edit&id=" . $book->product_id . "' class='btn btn-success'>Edit</a>
                           <a href='./index.php?action=delete&id=" . $book->product_id . "' class='btn btn-danger' >X</button>
                           </form>"
-                          ."</td>";
+            . "</td>";
 
-                        echo "</tr>";
-                      }
-                  }
+        echo "</tr>";
+    }
+}
 
-                 ?>
+?>
 
               </tbody>
             </table>
@@ -135,8 +138,8 @@
     <script src="./js/lightbox.js"></script>
 
     <?php
-    if(isset($_GET['message'])){
-      ?>
+if (isset($_GET['message'])) {
+    ?>
       <script src="./js/sweetalert.min.js"></script>
       <link rel="stylesheet" type="text/css" href="./css/sweetalert.css">
 
@@ -144,30 +147,29 @@
         document.querySelector('body').onload = function(){
           swal("Good job!", "You clicked the button!", "success");
 
-          <?php 
-              switch ($_GET['message']) {
-                  case "productDeleted":
-                      echo "swal(\"Good job!\", \"The product has been deleted!\", \"success\")";
-                      break;
-                  case "productEdited":
-                      echo "swal(\"Good job!\", \"The product has been edited successfully!\", \"success\")";
-                      break;
-                  case "productCreated":
-                      echo "swal(\"Good job!\", \"The product has been created successfully!\", \"success\")";
-                      break;
-                  default:
-                      echo "Your favorite color is neither red, blue, nor green!";
-              }
-              
+          <?php
+switch ($_GET['message']) {
+        case "productDeleted":
+            echo "swal(\"Good job!\", \"The product has been deleted!\", \"success\")";
+            break;
+        case "productEdited":
+            echo "swal(\"Good job!\", \"The product has been edited successfully!\", \"success\")";
+            break;
+        case "productCreated":
+            echo "swal(\"Good job!\", \"The product has been created successfully!\", \"success\")";
+            break;
+        default:
+            echo "Your favorite color is neither red, blue, nor green!";
+    }
 
-          ?>
+    ?>
         };
 
       </script>
 
       <?php
-      }
-  
-    include_once("./popupButtons.php"); ?>
+}
+
+include_once "./popupButtons.php";?>
   </body>
 </html>

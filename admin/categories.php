@@ -1,4 +1,4 @@
-<?php require('db.php'); ?>
+<?php require 'db.php';?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,11 +30,11 @@
 
   <body>
 
-    <?php include('topnavbar.php'); ?>
+    <?php include 'topnavbar.php';?>
 
     <div class="container-fluid">
       <div class="row">
-        <?php include('sidebar.php'); ?>
+        <?php include 'sidebar.php';?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h2 class="sub-header">Categories</h2>
          <div class="table-responsive">
@@ -50,22 +50,22 @@
               <tbody>
                 <?php
 
-                  /* Select queries return a resultset */
-                  $sql="SELECT * FROM Categories";
-                  if ($result = $conn->query($sql)) {
-                      while($book = $result->fetch_object()){
-                        echo "<tr>";
-                        echo "<td>" . $book->category_id . "</td>";
-                        echo "<td>" . $book->name . "</td>";
-                        echo "<td>" . $book->description . "</td>";
-                        echo "<td><a href='./index.php?action=viewCategory&id=". $book->category_id ."' class='btn btn-success'>Open</a>"
-                        ."<a href='./index.php?action=edit&id=". $book->category_id ."' class='btn btn-info '>Edit</a> "
-                        ."<a href='./index.php?action=delete&id=". $book->category_id ."' class='btn btn-danger'>X</a></td>";
-                        echo "</tr>";
-                      }
-                  }
+/* Select queries return a resultset */
+$sql = "SELECT * FROM categories";
+if ($result = $conn->query($sql)) {
+    while ($book = $result->fetch_object()) {
+        echo "<tr>";
+        echo "<td>" . $book->category_id . "</td>";
+        echo "<td>" . $book->name . "</td>";
+        echo "<td>" . $book->description . "</td>";
+        echo "<td><a href='./index.php?action=viewCategory&id=" . $book->category_id . "' class='btn btn-success'>Open</a>"
+        . "<a href='./index.php?action=edit&id=" . $book->category_id . "' class='btn btn-info '>Edit</a> "
+        . "<a href='./index.php?action=delete&id=" . $book->category_id . "' class='btn btn-danger'>X</a></td>";
+        echo "</tr>";
+    }
+}
 
-                 ?>
+?>
 
               </tbody>
             </table>
