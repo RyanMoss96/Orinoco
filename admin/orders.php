@@ -36,35 +36,44 @@
       <div class="row">
         <?php include 'sidebar.php';?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h2 class="sub-header">Categories</h2>
+          <h2 class="sub-header">Orders</h2>
          <div class="table-responsive">
             <table class="table table-striped">
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Name</th>
-                  <th>Description</th>
+                  <th>Customer Name</th>
+                  <th>Status</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
 
-/* Select queries return a resultset */
-$sql = "SELECT * FROM categories";
+$sql = "SELECT * FROM orders JOIN order_details on orders.order_id = order_details.order_id GROUP BY orders.order_id";
 if ($result = $conn->query($sql)) {
-    while ($book = $result->fetch_object()) {
+    while ($order = $result->fetch_object()) {
         echo "<tr>";
-        echo "<td>" . $book->category_id . "</td>";
-        echo "<td>" . $book->name . "</td>";
-        echo "<td>" . $book->description . "</td>";
-        echo "<td><a href='./index.php?action=viewCategory&id=" . $book->category_id . "' class='btn btn-success'>Open</a>"
-        . "<a href='./index.php?action=edit&id=" . $book->category_id . "' class='btn btn-info '>Edit</a> "
-        . "<a href='./index.php?action=delete&id=" . $book->category_id . "' class='btn btn-danger'>X</a></td>";
+        echo "<td>" . $order->order_id . "</td>";
+        echo "<td>" . getCustomerName($order->customer_id, $conn) . "</td>";
+        echo "<td>" . $order->order_status . "</td>";
+        echo "<td>" . $order->shipped_date . "</td>";
+        echo "<td><a href='./orderdetails.php?id=" . $order->order_id . "' class='btn btn-success'>Details</a></td>";
         echo "</tr>";
     }
 }
 
+function getCustomerName($customer_id, $conn)
+{
+    $sql = "SELECT * FROM customers WHERE customer_id=" . $customer_id;
+    if ($result = $conn->query($sql)) {
+        while ($customer = $result->fetch_object()) {
+            return $customer->first_name . " " . $customer->last_name;
+        }
+    } else {
+        return null;
+    }
+}
 ?>
 
               </tbody>

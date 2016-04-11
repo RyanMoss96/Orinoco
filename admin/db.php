@@ -1,7 +1,7 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
+$servername = "vesta.uclan.ac.uk";
+$username = "vrpadala";
+$password = "ckttdpg";
 $dbname = "vrpadala";
 
 // Create connection
@@ -10,8 +10,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-} 
-
+}
 
 // Example
 // $sql = "SELECT id, firstname, lastname FROM MyGuests";
@@ -26,5 +25,3 @@ if ($conn->connect_error) {
 //     echo "0 results";
 // }
 // $conn->close();
-
-?>
