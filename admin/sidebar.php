@@ -16,7 +16,7 @@
               </a>
             </li>
             <li <?php echo ($filename == "products.php") ? "class=\"active\"" : ""; ?>>
-              <a href="./products.php">Catalogue</a>
+              <a href="./products.php">Products</a>
             </li>
             <li <?php echo ($filename == "categories.php") ? "class=\"active\"" : ""; ?>>
               <a href="./categories.php">Categories</a>
