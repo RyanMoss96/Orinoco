@@ -100,7 +100,7 @@ if ($result = $conn->query($sql)) {
         echo "<td>" . getProductName($order->product_id, $conn) . "</td>";
         echo "<td>" . $order->quantity . "</td>";
         echo "<td>" . $order->price_bought . "</td>";
-        $totalprice += $order->price_bought;
+        $totalprice += $order->price_bought * $order->quantity;
         echo "</tr>";
     }
 }
