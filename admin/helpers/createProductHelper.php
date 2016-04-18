@@ -1,7 +1,4 @@
-<!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newProduct">
-        Launch demo modal
-      </button>
+
       <script type="text/javascript">
           $(window).load(function(){
               $('#newProduct').modal('show');
