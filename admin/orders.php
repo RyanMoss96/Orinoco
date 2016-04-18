@@ -26,6 +26,7 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+   
   </head>
 
   <body>
@@ -36,7 +37,14 @@
       <div class="row">
         <?php include 'sidebar.php';?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h2 class="sub-header">Orders</h2>
+          <span><span style="font-size: 24px;font-weight: bold;" class="sub-header">Orders</span>
+            <span>
+              <form action="orders.php" method="post">
+                <input type="date" name="date" min="2016-01-02">
+                <input type="submit">
+              </form>
+            </span>
+          </span>
          <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -44,6 +52,7 @@
                   <th>#</th>
                   <th>Customer Name</th>
                   <th>Status</th>
+                  <th>Shipped date</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -51,13 +60,24 @@
                 <?php
 
 $sql = "SELECT * FROM orders JOIN order_details on orders.order_id = order_details.order_id GROUP BY orders.order_id";
+
+if(isset($_POST['date'])){
+  var_dump($_POST);
+
+}
 if ($result = $conn->query($sql)) {
     while ($order = $result->fetch_object()) {
         echo "<tr>";
         echo "<td>" . $order->order_id . "</td>";
         echo "<td>" . getCustomerName($order->customer_id, $conn) . "</td>";
         echo "<td>" . $order->order_status . "</td>";
-        echo "<td>" . $order->shipped_date . "</td>";
+        echo "<td>"; 
+        if($order->shipped_date!=0){ 
+          echo date("F j, Y", strtotime($order->shipped_date));
+        }else{ 
+          echo "Not yet";
+        }
+        echo "</td>";
         echo "<td><a href='./orderdetails.php?id=" . $order->order_id . "' class='btn btn-success'>Details</a></td>";
         echo "</tr>";
     }
@@ -91,5 +111,6 @@ function getCustomerName($customer_id, $conn)
     <script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
+
   </body>
 </html>
