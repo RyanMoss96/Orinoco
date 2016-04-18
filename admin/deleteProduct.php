@@ -9,7 +9,7 @@ if (isset($_GET["id"])) {
 	$result = $conn->query($sql);
 }
 
-header("Location: ./index.php?message=productDeleted");
+header("Location: ./products.php?message=productDeleted");
 die();
 
 

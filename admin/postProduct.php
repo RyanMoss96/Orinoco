@@ -14,14 +14,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
 	
 	$description = isset($_POST["description"]) ? $_POST["description"] : null;
 	$price = isset($_POST["price"]) ? $_POST["price"] : null;
-	$discountprice = isset($_POST["discountprice"]) ? $_POST["discountprice"] : null;
 	$quantity = isset($_POST["quantity"]) ? $_POST["quantity"] : null;
+	
+	if ( isset($_POST["discountprice"]) && $_POST["discountprice"]!==null && $_POST["discountprice"]!==''){
+		$discountprice = $_POST["discountprice"];
+	}else{ 
+		$discountprice = 0;
+	}
 
 	if( isset($_GET['action']) && $_GET['action'] == "update"){
 		$sql = "UPDATE `products` SET `title` = '".$title."',`photo_url` = '".$photolink."',  `description` = '".$description."', `price` = '".$price."', `discount_price` = '".$discountprice."', `quantity` = '".$quantity."' WHERE `products`.`product_id` = ".$id;
 		$result = $conn->query($sql);
 		
-		header("Location: ./index.php?message=productEdited");
+		header("Location: ./products.php?message=productEdited");
 		
 	}else{
 
@@ -30,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
 		
 		$result = $conn->query($sql);
 
-		header("Location: ./index.php?message=productCreated");
+		header("Location: ./products.php?message=productCreated");
 
 	}
 }
