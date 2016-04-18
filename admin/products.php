@@ -36,7 +36,7 @@
       <div class="row">
         <?php include('sidebar.php'); ?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Dashboard</h1>
+          <h1 class="page-header">Products<a href="./products.php?action=new" class="btn btn-primary pull-right">New Product</a></h1>
 
           <div class="table-responsive">
             <table class="table table-striped">
@@ -102,5 +102,40 @@ if ($result !== false) {
     <script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
+
+<?php include_once "./popupButtons.php"; ?>
+
+    <?php
+if (isset($_GET['message'])) {
+    ?>
+      <script src="./js/sweetalert.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="./css/sweetalert.css">
+
+      <script type="text/javascript">
+        document.querySelector('body').onload = function(){
+          swal("Good job!", "You clicked the button!", "success");
+
+          <?php
+switch ($_GET['message']) {
+        case "productDeleted":
+            echo "swal(\"Good job!\", \"The product has been deleted!\", \"success\")";
+            break;
+        case "productEdited":
+            echo "swal(\"Good job!\", \"The product has been edited successfully!\", \"success\")";
+            break;
+        case "productCreated":
+            echo "swal(\"Good job!\", \"The product has been created successfully!\", \"success\")";
+            break;
+        default:
+            echo "Your favorite color is neither red, blue, nor green!";
+    }
+
+    ?>
+        };
+
+      </script>
+
+      <?php
+}?>
   </body>
 </html>
