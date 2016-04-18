@@ -35,14 +35,14 @@
         <?php
 
       }else if( $_GET['action']=="edit" && isset($_GET['id']) ){
-        require_once('getProduct.php');
+        require_once('functions.php');
 
         $book = getProduct($_GET['id'], $conn);
 
-        include('./helpers/editProductHelper.php');
+        include_once('./helpers/editProductHelper.php');
     } // end of edit action
     else if($_GET['action']=="new"){
-        include('./helpers/createProductHelper.php');
+        include_once('./helpers/createProductHelper.php');
     }
   } // end of isset action
   ?>
