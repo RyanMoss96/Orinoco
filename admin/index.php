@@ -31,7 +31,42 @@
     <link href="./css/lightbox.css" rel="stylesheet">
 
     <!-- Charts  -->
-    <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.5.1.css">
+    <!-- <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.5.1.css"> -->
+
+    <?php
+        require_once('functions.php');
+        $lastWeekCharts=getLastWeekCharts($conn);
+        if($lastWeekCharts!==false){
+          ?>
+
+    <script type="text/javascript">
+
+      window.onload = function () {
+        var chart = new CanvasJS.Chart("chartContainer", {
+          title:{
+            text: "Orders for the last 7 days"              
+          },
+          data: [              
+          {
+            // Change type to "doughnut", "line", "splineArea", etc.
+            type: "column",
+            dataPoints: [
+            <?php
+          while ($row = $lastWeekCharts->fetch_object()) {
+            echo "{ label: \"". $row->day."\",  y: ". $row->number_of_orders ."  },";
+          }
+            ?>
+              
+            ]
+          }
+          ]
+        });
+        chart.render();
+      }
+      </script>
+      <?php
+        }
+    ?>
 
   </head>
 
@@ -46,26 +81,9 @@
           <h1 class="page-header">Dashboard</h1>
 
           <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
+            <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+            <h5 class="pull-right">*Days that are not shown have 0 orders.</h5>
+
           </div>
 
           <h2 class="sub-header">Section title <a href="./index.php?action=new" class="btn btn-primary pull-right">New Product</a></h2>
@@ -171,5 +189,6 @@ switch ($_GET['message']) {
 }
 
 include_once "./popupButtons.php";?>
+    <script src="http://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
   </body>
 </html>
