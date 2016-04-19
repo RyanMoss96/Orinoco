@@ -1,4 +1,40 @@
-<?php require 'db.php';?>
+<?php 
+
+require_once('db.php');
+
+if(isset($_GET['action']) && $_GET['action']=='delete' && isset($_GET['id'])){
+
+    // check if there are products in this category
+    $sql= "SELECT count(*) as numberOfProducts FROM `products` WHERE `category_id` = ". $_GET['id'];
+    $productCounterQuery = $conn->query($sql);
+    $numberOfProductsInCategory;
+    while ($row = $productCounterQuery->fetch_object()) {
+      $numberOfProductsInCategory=intval($row->numberOfProducts);
+    }
+
+    // check if there are child categories in this category
+    $sql= "SELECT count(*) as numberOfCategories FROM  `categories` WHERE  `parent` =". $_GET['id'];
+    $categoryCounterQuery = $conn->query($sql);
+    $numberOfChildCategories;
+    while ($row = $categoryCounterQuery->fetch_object()) {
+      $numberOfChildCategories=intval($row->numberOfCategories);
+    }
+
+    if(isset($numberOfProductsInCategory) && $numberOfProductsInCategory==0 && isset($numberOfChildCategories) && $numberOfChildCategories==0){
+      $sql= "DELETE FROM `categories` WHERE `categories`.`category_id` = ". $_GET['id'];
+      $categoryDeletionQuery = $conn->query($sql);
+    }
+
+}else if(isset($_GET['action']) && $_GET['action']=='edit' && isset($_GET['id'])){
+       require_once('functions.php');
+
+        $category = getCategory($_GET['id'], $conn);
+        if($category==null){
+          die("Category not found");
+        }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -36,7 +72,8 @@
       <div class="row">
         <?php include 'sidebar.php';?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h2 class="sub-header">Categories</h2>
+          <h2 class="sub-header">Categories<a href="./categories.php?action=new" class="btn btn-primary pull-right">New Category</a></h2>
+
          <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -44,23 +81,24 @@
                   <th>#</th>
                   <th>Name</th>
                   <th>Description</th>
-                  <th>Actions</th>
+                  <th style='text-align:right'>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
 
 /* Select queries return a resultset */
-$sql = "SELECT * FROM categories";
+$sql = "SELECT * FROM categories order by position ASC";
 if ($result = $conn->query($sql)) {
     while ($book = $result->fetch_object()) {
         echo "<tr>";
         echo "<td>" . $book->category_id . "</td>";
         echo "<td>" . $book->name . "</td>";
         echo "<td>" . $book->description . "</td>";
-        echo "<td><a href='./index.php?action=viewCategory&id=" . $book->category_id . "' class='btn btn-success'>Open</a>"
-        . "<a href='./index.php?action=edit&id=" . $book->category_id . "' class='btn btn-info '>Edit</a> "
-        . "<a href='./index.php?action=delete&id=" . $book->category_id . "' class='btn btn-danger'>X</a></td>";
+        echo "<td style='text-align:right'><a href='./products.php?action=viewCategory&category_id=" . $book->category_id . "' class='btn btn-success'>Open</a> "
+        . "<a href='./categories.php?action=edit&id=" . $book->category_id . "' class='btn btn-info '>Edit</a> "
+        . "<a href='./categories.php?action=delete&id=" . $book->category_id . "' class='btn btn-danger'>X</a>"
+        ."</td>";
         echo "</tr>";
     }
 }
@@ -82,5 +120,47 @@ if ($result = $conn->query($sql)) {
     <script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
+
+    <?php 
+
+      if(false)include 'helpers/editCategoryHelper.php';
+      if (isset($_GET['action']) && $_GET['action']=="new"){
+        include 'helpers/createCategoryHelper.php';
+      }else if (isset($_GET['action']) && $_GET['action']=="edit" && isset($_GET['id'])){
+        include 'helpers/editCategoryHelper.php';
+
+      }
+      ?>
+      <script src="./js/sweetalert.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="./css/sweetalert.css">
+
+      <script type="text/javascript">
+        document.querySelector('body').onload = function(){
+        <?php  
+
+            if(isset($_GET['action']) && $_GET['action']=='delete' && isset($_GET['id'])){
+
+             if (isset($categoryDeletionQuery) && $categoryDeletionQuery==true) {
+               echo "swal(\"Good job!\", \"The category has been deleted!\", \"success\")";
+
+              }else if( isset($numberOfChildCategories) && $numberOfChildCategories > 0 ){
+                echo "swal(\"Oops...\", \"Cannot delete category with child categories!\", \"error\");";
+
+              }
+            }
+
+            if(isset($_GET['message']) && $_GET['message']=='categoryCreated'){
+              echo "swal(\"Good job!\", \"The category has been created!\", \"success\")";
+            }else if( $numberOfProductsInCategory > 0 ){
+             echo "swal(\"Oops...\", \"Cannot delete category with products assigned to it!\", \"error\");";
+            }
+
+      ?>
+};
+
+      </script>
+    
+
+
   </body>
 </html>

@@ -47,7 +47,10 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
       <div class="row">
         <?php include 'sidebar.php';?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h2 class="sub-header">Categories <span class="pull-right"><a href="./export-action.php" class="btn btn-info">Generate</a></span></h2>
+          <h2 class="sub-header">Categories 
+            <span class="pull-right"><a href="./export_api.php?save=true" class="btn btn-info">Generate file</a>
+            <a href="./export_api.php" target="_blank" class="btn btn-info">API</a></span>
+          </h2>
          <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -106,7 +109,7 @@ if (isset($_GET['action']) && $_GET['action'] == "export" && isset($_GET['succes
     if ($_GET['successful'] == "true") {
         echo "swal(\"Good job!\", \"An export file has been generated!\", \"success\");";
     } else if ($_GET['successful'] == "false") {
-        echo "swal(\"Oops...\", \"Something went wrong!\", \"error\");";
+        echo "swal(\"Oops...\", \"You don't have permissions to save the file!\", \"error\");";
     }
 }
 if (isset($_GET['action']) && $_GET['action'] == "download" && isset($_GET['successful'])) {

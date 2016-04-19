@@ -1,5 +1,4 @@
     <?php 
-    require('mustLogin.php');
 
     if(isset($_GET['action'])){
 
@@ -35,15 +34,12 @@
 
         <?php
 
-      }else if( $_GET['action']=="edit" && isset($_GET['id']) ){
-        require_once('functions.php');
-
-        $book = getProduct($_GET['id'], $conn);
-
-        include_once('./helpers/editProductHelper.php');
+      }else 
+      if( $_GET['action']=="edit" && isset($_GET['id']) ){
+        include_once('./helpers/editCategoryHelper.php');
     } // end of edit action
-    else if($_GET['action']=="new"){
-        include_once('./helpers/createProductHelper.php');
-    }
+    // else if($_GET['action']=="new"){
+    //     include_once('./helpers/createProductHelper.php');
+    // }
   } // end of isset action
   ?>

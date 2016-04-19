@@ -1,11 +1,16 @@
-<?php $filename = basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);?>
+<?php 
+require('mustLogin.php');
+
+$filename = basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
+
+?>
         <div class="col-sm-3 col-md-2 sidebar">
 
           <!-- Admin image & info -->
           <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 placeholder" style="margin: 0 auto;width:100%">
-              <img src="./images/users/chrys.jpg" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Chrysanthos</h4>
+              <img src="<?php echo isset($_SESSION['image'])?$_SESSION['image']:"http://localhost/Orinoco/admin/images/users/nouser.jpg"; ?>" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4><?php echo isset($_SESSION['username'])?$_SESSION['username']:""; ?></h4>
               <span class="text-muted">Admin</span>
             </div>
           </div>
@@ -27,6 +32,7 @@
             <li <?php echo ($filename == "orders.php" || $filename == "orderdetails.php") ? "class=\"active\"" : ""; ?>>
               <a href="./orders.php">Orders</a>
             </li>
+            <li><a href="./logout.php">Logout</a></li>
           </ul>
 
         </div>

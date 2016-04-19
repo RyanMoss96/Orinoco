@@ -1,3 +1,37 @@
+<?php
+	require_once('db.php');
+
+	if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
+	
+		$email = isset($_POST["email"]) ? $_POST["email"] : null;
+		$password = isset($_POST["password"]) ? $_POST["password"] : null;
+
+		if(($email==null || $password==null) || (isset($_SESSION['username'])) ){
+			header("Location: ./index.php");
+		}
+
+		$result = $conn->query("SELECT * FROM customers WHERE isAdmin = 1");
+
+		if ($result !== false) {
+		    while ($user = $result->fetch_object()) {
+		    	if($user->email==$email && $user->password==$password){
+					if(!isset($_SESSION)) {
+					    session_start(); 
+					}
+		    		$_SESSION['username'] = $user->first_name." " . $user->last_name;
+		    		if($user->image!=null) $_SESSION['image'] = $user->image;
+		    		header("Location: index.php");
+		    		break;
+		    	}
+		    }
+		}
+
+	}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,7 +39,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>Orinoco Login</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -17,69 +51,69 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style type="text/css">
-    @import "bourbon";
 
-body {
-	background: #eee !important;	
-}
-
-.wrapper {	
-	margin-top: 80px;
-  margin-bottom: 80px;
-}
-
-.form-signin {
-  max-width: 380px;
-  padding: 15px 35px 45px;
-  margin: 0 auto;
-  background-color: #fff;
-  border: 1px solid rgba(0,0,0,0.1);  
-
-  .form-signin-heading,
-	.checkbox {
-	  margin-bottom: 30px;
+	body {
+		background: #eee !important;	
 	}
 
-	.checkbox {
-	  font-weight: normal;
+	.wrapper {	
+		margin-top: 80px;
+	  margin-bottom: 80px;
 	}
 
-	.form-control {
-	  position: relative;
-	  font-size: 16px;
-	  height: auto;
-	  padding: 10px;
-		@include box-sizing(border-box);
+	.form-signin {
+	  max-width: 380px;
+	  padding: 15px 35px 45px;
+	  margin: 0 auto;
+	  background-color: #fff;
+	  border: 1px solid rgba(0,0,0,0.1);  
 
-		&:focus {
-		  z-index: 2;
+	  .form-signin-heading,
+		.checkbox {
+		  margin-bottom: 30px;
+		}
+
+		.checkbox {
+		  font-weight: normal;
+		}
+
+		.form-control {
+		  position: relative;
+		  font-size: 16px;
+		  height: auto;
+		  padding: 10px;
+			@include box-sizing(border-box);
+
+			&:focus {
+			  z-index: 2;
+			}
+		}
+
+		input[type="text"] {
+		  margin-bottom: -1px;
+		  border-bottom-left-radius: 0;
+		  border-bottom-right-radius: 0;
+		}
+
+		input[type="password"] {
+		  margin-bottom: 20px;
+		  border-top-left-radius: 0;
+		  border-top-right-radius: 0;
 		}
 	}
 
-	input[type="text"] {
-	  margin-bottom: -1px;
-	  border-bottom-left-radius: 0;
-	  border-bottom-right-radius: 0;
-	}
-
-	input[type="password"] {
-	  margin-bottom: 20px;
-	  border-top-left-radius: 0;
-	  border-top-right-radius: 0;
-	}
-}
-
-</style>
+	</style>
   </head>
   <body>
 
       <div class="wrapper">
-	    <form class="form-signin">
+
+      <form method="POST" action="login.php" id="postProduct" class="form-signin">
 
 	      <h2 class="form-signin-heading">Please login</h2>
 
 	      <div class="form-group">
-	      	<input type="text" class="form-control" name="username" placeholder="Email Address" required="" autofocus="" />
+	      	<input type="text" class="form-control" name="email" placeholder="Email Address" required="" autofocus="" />
 	      </div>
 
 	      <div class="form-group">

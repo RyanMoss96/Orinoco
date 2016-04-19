@@ -12,6 +12,17 @@ function getProduct($id, $conn)
     return null;
 }
 
+function getCategory($id, $conn)
+{
+    $sql = "SELECT * FROM categories WHERE category_id=" . $id;
+    if ($result = $conn->query($sql)) {
+        while ($category = $result->fetch_object()) {
+            return $category;
+        }
+    }
+    return null;
+}
+
 function getLastWeekCharts($conn){
 
 	$sql= "SELECT DAYNAME(DATE(created_at)) as day, count(order_id) as number_of_orders from orders WHERE created_at >= DATE(NOW()) - INTERVAL 7 DAY GROUP by day";

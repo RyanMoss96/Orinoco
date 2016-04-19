@@ -1,7 +1,4 @@
- <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#editProduct">
-        Launch demo modal
-      </button>
+
       <script type="text/javascript">
           $(window).load(function(){
               $('#editProduct').modal('show');
@@ -83,6 +80,18 @@
                 <input class="form-control" id="quantity" name="quantity" type="number" required
                  <?php if(isset($book->quantity) && $book->quantity!= NULL){
                   echo "value=\"". $book->quantity. "\"";
+                  }?> />
+               </div>
+               <div class="form-group ">
+                <label class="control-label requiredField" for="category">
+                 Category id
+                 <span class="asteriskField">
+                  *
+                 </span>
+                </label>
+                <input class="form-control" id="category" name="category" type="number" required
+                 <?php if(isset($book->category_id) && $book->category_id!= NULL){
+                  echo "value=\"". $book->category_id. "\"";
                   }?> />
                </div>
                <span>* = required</span>

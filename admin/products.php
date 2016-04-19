@@ -1,4 +1,6 @@
-<?php require('db.php'); ?>
+<?php 
+require_once('db.php');
+ ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -26,6 +28,10 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!-- Lightbox -->
+    <link href="./css/lightbox.css" rel="stylesheet">
+
   </head>
 
   <body>
@@ -38,7 +44,21 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Products<a href="./products.php?action=new" class="btn btn-primary pull-right">New Product</a></h1>
 
-          <div class="table-responsive">
+          
+                <?php
+
+/* Select queries return a resultset */
+$sql = "SELECT * FROM products";
+if(isset($_GET['action']) && $_GET['action']=="viewCategory" && isset($_GET['category_id'])){
+  $sql.=" where category_id = ". $_GET['category_id'];
+}
+$result = $conn->query($sql);
+
+if ($result !== false) {
+  if($result->num_rows>0){
+    ?>
+
+<div class="table-responsive">
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -49,18 +69,13 @@
                   <th>Price</th>
                   <th>Discount price</th>
                   <th>Quantity</th>
+                  <th>Category id</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                <?php
 
-/* Select queries return a resultset */
-$sql = "SELECT * FROM products";
-$result = $conn->query($sql);
-// var_dump($result);
-// trigger_error($conn->error . " " . $sql);
-if ($result !== false) {
+    <?php
     while ($book = $result->fetch_object()) {
         echo "<tr>";
         echo "<td>" . $book->product_id . "</td>";
@@ -72,6 +87,7 @@ if ($result !== false) {
         echo "<td>" . $book->price . "</td>";
         echo "<td>" . $book->discount_price . "</td>";
         echo "<td>" . $book->quantity . "</td>";
+        echo "<td>" . $book->category_id . "</td>";
         // echo "<td> "
         // ."<a href='./index.php?action=delete&id=". $book->product_id ."' class='btn btn-danger'>X</a>";
         echo "<td>"
@@ -83,13 +99,20 @@ if ($result !== false) {
 
         echo "</tr>";
     }
-}
-
-?>
+    ?>
 
               </tbody>
             </table>
           </div>
+
+    <?php
+  }else{
+    echo "There are no products in this category.";
+  }
+}
+
+?>
+
         </div>
       </div>
     </div>
@@ -137,5 +160,8 @@ switch ($_GET['message']) {
 
       <?php
 }?>
+    <!-- Lightbox -->
+    <script src="./js/lightbox.js"></script>
+
   </body>
 </html>

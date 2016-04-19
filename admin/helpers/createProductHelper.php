@@ -59,6 +59,15 @@
                 </label>
                 <input class="form-control" id="quantity" name="quantity" type="text" required/>
                </div>
+               <div class="form-group ">
+                <label class="control-label requiredField" for="category">
+                 Category id
+                 <span class="asteriskField">
+                  *
+                 </span>
+                </label>
+                <input class="form-control" id="category" name="category" type="text" required value="0" />
+               </div>
                <span>* = required</span>
               </form>
 

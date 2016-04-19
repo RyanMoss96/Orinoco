@@ -1,4 +1,7 @@
-<?php require 'db.php';?>
+<?php 
+require_once('db.php');
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,9 +32,6 @@
 
     <!-- Lightbox -->
     <link href="./css/lightbox.css" rel="stylesheet">
-
-    <!-- Charts  -->
-    <!-- <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.5.1.css"> -->
 
     <?php
         require_once('functions.php');
