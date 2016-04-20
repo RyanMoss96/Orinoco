@@ -40,12 +40,12 @@ require 'db.php';
         <?php include 'sidebar.php';?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <span><span style="font-size: 24px;font-weight: bold;" class="sub-header">Orders</span>
-            <span>
+         <!--    <span>
               <form action="orders.php" method="post">
                 <input type="date" name="date" min="2016-01-02">
                 <input type="submit">
               </form>
-            </span>
+            </span> -->
           </span>
          <div class="table-responsive">
             <table class="table table-striped">
@@ -54,6 +54,7 @@ require 'db.php';
                   <th>#</th>
                   <th>Customer Name</th>
                   <th>Status</th>
+                  <th>Order placed</th>
                   <th>Shipped date</th>
                   <th>Actions</th>
                 </tr>
@@ -73,6 +74,7 @@ if ($result = $conn->query($sql)) {
         echo "<td>" . $order->order_id . "</td>";
         echo "<td>" . getCustomerName($order->customer_id, $conn) . "</td>";
         echo "<td>" . $order->order_status . "</td>";
+        echo "<td>" . date("F j, Y", strtotime($order->created_at)) . "</td>";
         echo "<td>"; 
         if($order->shipped_date!=0){ 
           echo date("F j, Y", strtotime($order->shipped_date));
