@@ -81,6 +81,7 @@ if(isset($_GET['action']) && $_GET['action']=='delete' && isset($_GET['id'])){
                   <th>#</th>
                   <th>Name</th>
                   <th>Description</th>
+                  <th>Parent id</th>
                   <th style='text-align:right'>Actions</th>
                 </tr>
               </thead>
@@ -95,6 +96,7 @@ if ($result = $conn->query($sql)) {
         echo "<td>" . $book->category_id . "</td>";
         echo "<td>" . $book->name . "</td>";
         echo "<td>" . $book->description . "</td>";
+        echo "<td>" . $book->parent . "</td>";
         echo "<td style='text-align:right'><a href='./products.php?action=viewCategory&category_id=" . $book->category_id . "' class='btn btn-success'>Open</a> "
         . "<a href='./categories.php?action=edit&id=" . $book->category_id . "' class='btn btn-info '>Edit</a> "
         . "<a href='./categories.php?action=delete&id=" . $book->category_id . "' class='btn btn-danger'>X</a>"

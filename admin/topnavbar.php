@@ -11,14 +11,13 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
+            <li><a class="hidden-lg hidden-md hidden-sm " href="./index.php">Overview</a></li>
+            <li><a class="hidden-lg hidden-md hidden-sm " href="./products.php">Products</a></li>
+            <li><a class="hidden-lg hidden-md hidden-sm " href="./categories.php">Categories</a></li>
+            <li><a class="hidden-lg hidden-md hidden-sm " href="./export.php">Export</a></li>
+            <li><a class="hidden-lg hidden-md hidden-sm " href="./orders.php">Orders</a></li>
+            <li><a href="./logout.php">Logout</a></li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
         </div>
       </div>
     </nav>
