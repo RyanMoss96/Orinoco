@@ -1,5 +1,12 @@
 <?php 
 require 'db.php';
+
+if(isset($_GET['shipped_id'])){
+
+  $sql = "UPDATE `orders` SET  `shipped_date` =  CURRENT_TIMESTAMP, `order_status` = 'Order Shipped'  WHERE  `orders`.`order_id` =".$_GET['shipped_id'];
+  $result = $conn->query($sql);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,12 +69,8 @@ require 'db.php';
               <tbody>
                 <?php
 
-$sql = "SELECT * FROM orders JOIN order_details on orders.order_id = order_details.order_id GROUP BY orders.order_id";
+$sql = "SELECT * FROM orders JOIN order_details on orders.order_id = order_details.order_id  GROUP BY orders.order_id ORDER BY orders.order_id DESC";
 
-if(isset($_POST['date'])){
-  var_dump($_POST);
-
-}
 if ($result = $conn->query($sql)) {
     while ($order = $result->fetch_object()) {
         echo "<tr>";
@@ -82,7 +85,9 @@ if ($result = $conn->query($sql)) {
           echo "Not yet";
         }
         echo "</td>";
-        echo "<td><a href='./orderdetails.php?id=" . $order->order_id . "' class='btn btn-success'>Details</a></td>";
+        echo "<td><a href='./orderdetails.php?id=" . $order->order_id . "' class='btn btn-info'>Details</a> ";
+        if($order->shipped_date==0){echo "<a href='./orders.php?shipped_id=" . $order->order_id . "' class='btn btn-success'>Mark as shipped!</a>";}
+        echo "</td>";
         echo "</tr>";
     }
 }

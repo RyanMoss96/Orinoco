@@ -55,7 +55,13 @@ if ($result = $conn->query($sql)) {
     while ($order = $result->fetch_object()) {
         echo "<h4>Customer name: <strong>" . getCustomerName($order->customer_id, $conn) . "</strong></h4>";
         echo "<h4>Order status: <strong>" . $order->order_status . "</strong></h4>";
-        echo "<h4>Shipped date: <strong>" . $order->shipped_date . "</strong></h4>";
+        echo "<h4>Shipped date: <strong>";
+        if($order->shipped_date==0){
+          echo "Not shipped yet";
+        }else{
+          $order->shipped_date;
+        }
+        echo "</strong></h4>";
     }
 }
 

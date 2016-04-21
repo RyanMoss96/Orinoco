@@ -82,18 +82,23 @@
                   echo "value=\"". $book->quantity. "\"";
                   }?> />
                </div>
-               <div class="form-group ">
-                <label class="control-label requiredField" for="category">
-                 Category id
-                 <span class="asteriskField">
-                  *
-                 </span>
-                </label>
-                <input class="form-control" id="category" name="category" type="number" required
-                 <?php if(isset($book->category_id) && $book->category_id!= NULL){
-                  echo "value=\"". $book->category_id. "\"";
-                  }?> />
-               </div>
+              <div class="form-group">
+                <label for="category">Category:</label>
+                <select class="form-control" id="category" name="category">
+                <?php
+                    $sql= "SELECT * FROM  `categories`";
+                    $categories = $conn->query($sql);
+                    while ($row = $categories->fetch_object()) {
+                      echo "<option value='".$row->category_id."' "; 
+                      if($book->category_id==$row->category_id){
+                        echo " selected ";
+                      }
+                      echo ">".$row->name."</option>";
+                    }
+
+                ?>
+                </select>
+              </div>
                <span>* = required</span>
               </form>
 

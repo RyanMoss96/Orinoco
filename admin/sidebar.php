@@ -9,7 +9,7 @@ $filename = basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
           <!-- Admin image & info -->
           <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 placeholder" style="margin: 0 auto;width:100%">
-              <img src="<?php echo isset($_SESSION['image'])?$_SESSION['image']:"http://vesta.uclan.ac.uk/~vrpadala/orinoco/admin/images/users/nouser.jpg"; ?>" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <img src="<?php echo isset($_SESSION['image'])?$_SESSION['image']:"http://vesta.uclan.ac.uk/~vrpadala/orinoco/admin/images/users/nouser.png"; ?>" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
               <h4><?php echo isset($_SESSION['username'])?$_SESSION['username']:""; ?></h4>
               <span class="text-muted">Admin</span>
             </div>

@@ -47,7 +47,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
       <div class="row">
         <?php include 'sidebar.php';?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h2 class="sub-header">Categories 
+          <h2 class="sub-header">Export 
             <span class="pull-right"><a href="./export_api.php?save=true" class="btn btn-info">Generate file</a>
             <a href="./export_api.php" target="_blank" class="btn btn-info">API</a></span>
           </h2>

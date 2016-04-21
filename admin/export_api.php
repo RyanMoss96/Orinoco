@@ -12,7 +12,7 @@ $query3 = 'SELECT * FROM products';
 $records = $conn->query($query3) or die('cannot select from table: products');
 
 //table attributes
-$attributes = array('product_id', 'category_id', 'title', 'photo_url', 'description', 'price', 'discount_price', 'status', 'quantity', 'created_at', 'updated_at');
+$attributes = array('product_id', 'category_id', 'title', 'photo_url', 'description', 'price', 'discount_price', 'quantity', 'created_at', 'updated_at');
 $xml .= $tab . '<products>' . $br;
 
 while ($record = $records->fetch_object()) {

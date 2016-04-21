@@ -48,7 +48,7 @@ require_once('db.php');
                 <?php
 
 /* Select queries return a resultset */
-$sql = "SELECT * FROM products";
+$sql = "SELECT products.*, categories.name FROM products JOIN categories ON categories.category_id=products.category_id";
 if(isset($_GET['action']) && $_GET['action']=="viewCategory" && isset($_GET['category_id'])){
   $sql.=" where category_id = ". $_GET['category_id'];
 }
@@ -69,7 +69,7 @@ if ($result !== false) {
                   <th>Price</th>
                   <th>Discount price</th>
                   <th>Quantity</th>
-                  <th>Category id</th>
+                  <th>Category</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -85,9 +85,15 @@ if ($result !== false) {
         . "<img height='50px' src='" . $book->photo_url . "' data-lightbox='image-1'/></a></td>";
         echo "<td>" . $book->description . "</td>";
         echo "<td>" . $book->price . "</td>";
-        echo "<td>" . $book->discount_price . "</td>";
+        echo "<td>";
+        if ($book->discount_price==0){
+          echo "-";
+        }else{
+          echo $book->discount_price;
+        }
+        echo "</td>";
         echo "<td>" . $book->quantity . "</td>";
-        echo "<td>" . $book->category_id . "</td>";
+        echo "<td>" . $book->name . "</td>";
         // echo "<td> "
         // ."<a href='./index.php?action=delete&id=". $book->product_id ."' class='btn btn-danger'>X</a>";
         echo "<td>"

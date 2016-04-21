@@ -59,15 +59,19 @@
                 </label>
                 <input class="form-control" id="quantity" name="quantity" type="text" required/>
                </div>
-               <div class="form-group ">
-                <label class="control-label requiredField" for="category">
-                 Category id
-                 <span class="asteriskField">
-                  *
-                 </span>
-                </label>
-                <input class="form-control" id="category" name="category" type="text" required value="0" />
-               </div>
+               <div class="form-group">
+                <label for="category">Category:</label>
+                <select class="form-control" id="category" name="category">
+                <?php
+                    $sql= "SELECT * FROM  `categories`";
+                    $categories = $conn->query($sql);
+                    while ($row = $categories->fetch_object()) {
+                      echo "<option value='".$row->category_id."'>".$row->name."</option>";
+                    }
+
+                ?>
+                </select>
+              </div>
                <span>* = required</span>
               </form>
 
